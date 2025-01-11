@@ -1,5 +1,6 @@
 package com.mindhub.todolist.models;
 
+import com.mindhub.todolist.enums.RoleEnum;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -15,6 +16,7 @@ public class UserEntity {
 
     private String email;
     private String password;
+    private RoleEnum role = RoleEnum.USER;
 
     @OneToMany(mappedBy = "userEntity")
     private Set<Task> tasks = new HashSet<>();
@@ -52,9 +54,25 @@ public class UserEntity {
         return tasks;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void addTask(Task task) {
         task.setUser(this);
         tasks.add(task);
+    }
+
+    public RoleEnum getRole() {
+        return role;
+    }
+
+    public void setRole(RoleEnum role) {
+        this.role = role;
     }
 
     @Override

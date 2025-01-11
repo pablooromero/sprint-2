@@ -5,6 +5,7 @@ import com.mindhub.todolist.models.Task;
 import com.mindhub.todolist.models.UserEntity;
 import com.mindhub.todolist.repositories.TaskRepository;
 import com.mindhub.todolist.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
