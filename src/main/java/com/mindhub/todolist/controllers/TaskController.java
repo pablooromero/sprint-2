@@ -14,13 +14,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/tasks")
+@RequestMapping("/api/user/tasks")
 public class TaskController {
 
     @Autowired
@@ -37,8 +38,8 @@ public class TaskController {
             )
     })
     @GetMapping
-    public ResponseEntity<List<TaskDTO>> getAllTasks() {
-        List<TaskDTO> tasks = taskService.getAllTasks()
+    public ResponseEntity<List<TaskDTO>> getAllTasksByUserId(Authentication authentication) throws UserNotFoundException {
+        List<TaskDTO> tasks = taskService.getAllTasksByUserId(authentication)
                 .stream()
                 .map(TaskDTO::new)
                 .collect(Collectors.toList());
@@ -58,8 +59,8 @@ public class TaskController {
             )
     })
     @GetMapping("/{id}")
-    public ResponseEntity<TaskDTO> getTaskById(@PathVariable Long id) throws TaskNotFoundException {
-        TaskDTO task = taskService.getTaskById(id);
+    public ResponseEntity<TaskDTO> getTaskByUserId(@PathVariable Long id, Authentication authentication) throws TaskNotFoundException, UserNotFoundException {
+        TaskDTO task = taskService.getTaskByUserId(id, authentication);
         return new ResponseEntity<>(task, HttpStatus.OK);
     }
 
@@ -81,8 +82,8 @@ public class TaskController {
             )
     })
     @PostMapping
-    public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO) throws UserNotFoundException, IllegalAttributeException {
-        TaskDTO newTask = taskService.createTask(taskDTO);
+    public ResponseEntity<TaskDTO> createTaskUser(@RequestBody TaskDTO taskDTO, Authentication authentication) throws UserNotFoundException, IllegalAttributeException {
+        TaskDTO newTask = taskService.createTaskUser(taskDTO, authentication);
         return new ResponseEntity<>(newTask, HttpStatus.CREATED);
     }
 
@@ -106,8 +107,8 @@ public class TaskController {
             )
     })
     @PutMapping("/{id}")
-    public ResponseEntity<TaskDTO> updateTask(@PathVariable Long id, @RequestBody TaskDTO taskDTO) throws TaskNotFoundException, UserNotFoundException, IllegalAttributeException {
-        TaskDTO updatedTask = taskService.updateTask(id, taskDTO);
+    public ResponseEntity<TaskDTO> updateTaskUser(@PathVariable Long id, @RequestBody TaskDTO taskDTO, Authentication authentication) throws TaskNotFoundException, UserNotFoundException, IllegalAttributeException {
+        TaskDTO updatedTask = taskService.updateTaskUser(id, taskDTO, authentication);
         return new ResponseEntity<>(updatedTask, HttpStatus.OK);
     }
 
@@ -122,8 +123,8 @@ public class TaskController {
             )
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(@PathVariable Long id) throws TaskNotFoundException {
-            taskService.deleteTask(id);
+    public ResponseEntity<Void> deleteTaskUser(@PathVariable Long id, Authentication authentication) throws TaskNotFoundException, UserNotFoundException {
+            taskService.deleteTaskByUser(id, authentication);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
@@ -138,8 +139,8 @@ public class TaskController {
             )
     })
     @PutMapping("/complete/{id}")
-    public ResponseEntity<Void> completeTask(@PathVariable Long id) throws TaskNotFoundException {
-            taskService.completeTask(id);
+    public ResponseEntity<Void> completeTaskUser(@PathVariable Long id, Authentication authentication) throws TaskNotFoundException, UserNotFoundException {
+            taskService.completeTaskUser(id, authentication);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

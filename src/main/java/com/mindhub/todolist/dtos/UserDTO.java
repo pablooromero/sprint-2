@@ -18,7 +18,7 @@ public class UserDTO {
         email = userEntity.getEmail();
         tasks = userEntity.getTasks()
                 .stream()
-                .map( task -> new TaskDTO(task) ) //TaskDTO::new versión corta
+                .map(TaskDTO::new)
                 .toList();
     }
 

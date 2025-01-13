@@ -21,4 +21,9 @@ public class ExceptionHandlers {
     public ResponseEntity<String> illegalAttributeException(IllegalAttributeException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<String> accessDeniedException(AccessDeniedException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
 }

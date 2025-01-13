@@ -12,23 +12,28 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;
-    private RoleEnum role = RoleEnum.USER;
+
+    private RoleEnum role;
 
     @OneToMany(mappedBy = "userEntity")
     private Set<Task> tasks = new HashSet<>();
 
-    public UserEntity(String username, String email) {
+    public UserEntity(String username, String email, String password, RoleEnum role) {
         this.username = username;
         this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
-    public UserEntity() {
-
-    }
+    public UserEntity() {}
 
     public Long getId() {
         return id;
@@ -73,14 +78,5 @@ public class UserEntity {
 
     public void setRole(RoleEnum role) {
         this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                '}';
     }
 }

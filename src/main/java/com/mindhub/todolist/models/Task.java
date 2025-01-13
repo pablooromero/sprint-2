@@ -10,8 +10,13 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
     private TaskStatusEnum status;
 
     public Task(String title, String description, TaskStatusEnum status) {

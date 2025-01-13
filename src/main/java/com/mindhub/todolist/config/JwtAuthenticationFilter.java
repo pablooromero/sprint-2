@@ -28,9 +28,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
+
         String requestURI = request.getRequestURI();
 
-        // Allow access to public endpoints without authentication
         if (requestURI.startsWith("/public/")) {
             chain.doFilter(request, response);
             return;

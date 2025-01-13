@@ -45,7 +45,7 @@ public class JwtUtils {
                 .verifyWith(secretKey)
                 .build()
                 .parseSignedClaims(token)
-                .getBody();
+                .getPayload();
     }
 
     private boolean isTokenExpired(String token) {
