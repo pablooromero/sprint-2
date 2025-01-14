@@ -1,5 +1,6 @@
 package com.mindhub.todolist.controllers;
 
+import com.mindhub.todolist.dtos.AuthResponseDTO;
 import com.mindhub.todolist.dtos.UserDTO;
 import com.mindhub.todolist.exceptions.IllegalAttributeException;
 import com.mindhub.todolist.exceptions.UserNotFoundException;
@@ -77,4 +78,5 @@ public class UserController {
         userService.deleteUserByUser(id, authentication);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }

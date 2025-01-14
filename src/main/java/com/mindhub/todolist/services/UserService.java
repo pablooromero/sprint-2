@@ -1,5 +1,7 @@
 package com.mindhub.todolist.services;
 
+import com.mindhub.todolist.dtos.AuthResponseDTO;
+import com.mindhub.todolist.dtos.ChangePasswordDTO;
 import com.mindhub.todolist.dtos.UserDTO;
 import com.mindhub.todolist.exceptions.IllegalAttributeException;
 import com.mindhub.todolist.exceptions.UserNotFoundException;
@@ -25,6 +27,8 @@ public interface UserService {
     UserDTO updateUser(Long id, UserDTO userDTO) throws UserNotFoundException, IllegalAttributeException;
 
     void deleteUserByUser(Long id, Authentication authentication) throws UserNotFoundException;
+
+    AuthResponseDTO changePassword(ChangePasswordDTO changePasswordDTO, Authentication authentication) throws UserNotFoundException;
 
     void validateUser(UserDTO userDTO) throws UserNotFoundException, IllegalAttributeException;
 
