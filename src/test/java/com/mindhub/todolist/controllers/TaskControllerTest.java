@@ -65,7 +65,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    void getAllTasksByUserId_success() throws Exception {
+    void getAllTasksByUserIdSuccess() throws Exception {
         List<Task> mockTasks = new ArrayList<>();
 
         mockTasks.add(task);
@@ -84,7 +84,7 @@ public class TaskControllerTest {
 
 
     @Test
-    void getTaskByUserId_success() throws Exception {
+    void getTaskByUserIdSuccess() throws Exception {
         TaskDTO mockTaskDTO = new TaskDTO(task);
 
         when(taskService.getTaskByUserId(eq(task.getId()), any(Authentication.class))).thenReturn(mockTaskDTO);
@@ -98,7 +98,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    void createTaskUser_success() throws Exception {
+    void createTaskUserSuccess() throws Exception {
         TaskDTO mockTaskDTO = new TaskDTO(task);
 
         when(taskService.createTaskUser(any(TaskDTO.class), any(Authentication.class))).thenReturn(mockTaskDTO);
@@ -114,7 +114,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    void updateTaskUser_success() throws Exception {
+    void updateTaskUserSuccess() throws Exception {
         TaskDTO mockTaskDTO = new TaskDTO(task);
 
         when(taskService.updateTaskUser(eq(task.getId()), any(TaskDTO.class), any(Authentication.class))).thenReturn(mockTaskDTO);
@@ -130,7 +130,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    void deleteTaskUser_success() throws Exception {
+    void deleteTaskUserSuccess() throws Exception {
         doNothing().when(taskService).deleteTaskByUser(eq(task.getId()), any(Authentication.class));
 
         mockMvc.perform(delete("/api/user/tasks/{id}", task.getId())
@@ -141,7 +141,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    void completeTaskUser_success() throws Exception {
+    void completeTaskUserSuccess() throws Exception {
         doNothing().when(taskService).completeTaskUser(eq(task.getId()), any(Authentication.class));
 
         mockMvc.perform(put("/api/user/tasks/complete/{id}", task.getId())

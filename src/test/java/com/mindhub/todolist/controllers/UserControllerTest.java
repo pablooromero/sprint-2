@@ -46,7 +46,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void getUserProfile_success() throws Exception {
+    void getUserProfileSuccess() throws Exception {
 
         when(userService.getUserProfile(eq(1L), any(Authentication.class))).thenReturn(mockUser);
 
@@ -61,7 +61,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void updateUserByUser_success() throws Exception {
+    void updateUserByUserSuccess() throws Exception {
         mockUser.setUsername("updateduser");
         mockUser.setEmail("updateduser@example.com");
 
@@ -80,7 +80,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void deleteUserByUser_success() throws Exception {
+    void deleteUserByUserSuccess() throws Exception {
         doNothing().when(userService).deleteUserByUser(eq(1L), any(Authentication.class));
 
         mockMvc.perform(delete("/api/user/users/1")

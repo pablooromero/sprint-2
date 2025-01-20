@@ -35,7 +35,7 @@ public class TaskRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Find task by ID and user ID - Success")
-    void findByIdAndUserEntityId_Success() {
+    void findByIdAndUserEntityIdSuccess() {
         Task task = new Task();
         task.setTitle("Test Task");
         task.setDescription("This is a test task");
@@ -52,7 +52,7 @@ public class TaskRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Find task by ID and user ID - No match for ID")
-    void findByIdAndUserEntityId_NoMatchForId() {
+    void findByIdAndUserEntityIdNoMatchForId() {
         Optional<Task> result = taskRepository.findByIdAndUserEntityId(999L, user.getId());
 
         assertFalse(result.isPresent(), "Task should not be found for non-existent task ID");
@@ -60,7 +60,7 @@ public class TaskRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Find task by ID and user ID - No match for user ID")
-    void findByIdAndUserEntityId_NoMatchForUserId() {
+    void findByIdAndUserEntityIdNoMatchForUserId() {
         UserEntity anotherUser = new UserEntity();
         anotherUser.setUsername("anotherUser");
         anotherUser.setEmail("another@example.com");
@@ -81,7 +81,7 @@ public class TaskRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Find task by ID and user ID - Task not found for non-existent user")
-    void findByIdAndUserEntityId_TaskNotFoundForNonExistentUser() {
+    void findByIdAndUserEntityIdTaskNotFoundForNonExistentUser() {
         UserEntity nonExistentUser = new UserEntity();
         nonExistentUser.setUsername("nonExistentUser");
         nonExistentUser.setEmail("nonexistent@example.com");
@@ -106,7 +106,7 @@ public class TaskRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Find task by ID and user ID - Multiple tasks")
-    void findByIdAndUserEntityId_MultipleTasks() {
+    void findByIdAndUserEntityIdMultipleTasks() {
         Task task1 = new Task();
         task1.setTitle("Task 1");
         task1.setDescription("Task 1 description");

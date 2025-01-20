@@ -63,7 +63,7 @@ public class AuthControllerTest {
 
 
     @Test
-    void login_success() throws Exception {
+    void loginSuccess() throws Exception {
         AuthResponseDTO mockResponse = new AuthResponseDTO("mockToken", "Logged in successfully");
 
         when(authService.authenticateUser(any(LoginUser.class))).thenReturn(ResponseEntity.ok(mockResponse));
@@ -80,7 +80,7 @@ public class AuthControllerTest {
 
 
     @Test
-    void login_invalidCredentials() throws Exception {
+    void loginInvalidCredentials() throws Exception {
         when(authService.authenticateUser(any(LoginUser.class)))
                 .thenReturn(ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new AuthResponseDTO("-", "Invalid email or password")));
@@ -96,7 +96,7 @@ public class AuthControllerTest {
     }
 
     @Test
-    void login_internalServerError() throws Exception {
+    void loginInternalServerError() throws Exception {
         when(authService.authenticateUser(any(LoginUser.class)))
                 .thenReturn(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body(new AuthResponseDTO("-", "An error occurred during login")));
@@ -113,7 +113,7 @@ public class AuthControllerTest {
 
 
     @Test
-    void register_success() throws Exception {
+    void registerSuccess() throws Exception {
         AuthResponseDTO mockResponse = new AuthResponseDTO("mockToken", "Token received");
         mockResponse.setToken("mockToken");
         when(authService.registerUser(any(RegisterUserDTO.class))).thenReturn(mockResponse);
@@ -128,7 +128,7 @@ public class AuthControllerTest {
 
 
     @Test
-    void register_missingFields() throws Exception {
+    void registerMissingFields() throws Exception {
         RegisterUserDTO incompleteUser = new RegisterUserDTO();
         incompleteUser.setUsername("newuser");
 
@@ -146,7 +146,7 @@ public class AuthControllerTest {
     }
 
     @Test
-    void register_emailOrUsernameAlreadyInUse() throws Exception {
+    void registerEmailOrUsernameAlreadyInUse() throws Exception {
         when(authService.registerUser(any(RegisterUserDTO.class)))
                 .thenReturn(new AuthResponseDTO("-", "The email or username is already in use."));
 

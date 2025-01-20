@@ -41,7 +41,7 @@ public class UserRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Find user by email - User exists")
-    void findByEmail_UserExists() {
+    void findByEmailUserExists() {
         Optional<UserEntity> result = userRepository.findByEmail(testUser.getEmail());
 
         assertTrue(result.isPresent(), "User should be found by email");
@@ -50,7 +50,7 @@ public class UserRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Find user by email - User does not exist")
-    void findByEmail_UserDoesNotExist() {
+    void findByEmailUserDoesNotExist() {
         Optional<UserEntity> result = userRepository.findByEmail("nonexistent@example.com");
 
         assertFalse(result.isPresent(), "User should not be found by non-existent email");
@@ -58,7 +58,7 @@ public class UserRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Check if email exists - Email exists")
-    void existsByEmail_EmailExists() {
+    void existsByEmailEmailExists() {
         boolean exists = userRepository.existsByEmail(testUser.getEmail());
 
         assertTrue(exists, "Email should exist in the database");
@@ -66,7 +66,7 @@ public class UserRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Check if email exists - Email does not exist")
-    void existsByEmail_EmailDoesNotExist() {
+    void existsByEmailEmailDoesNotExist() {
         boolean exists = userRepository.existsByEmail("nonexistent@example.com");
 
         assertFalse(exists, "Email should not exist in the database");
@@ -74,7 +74,7 @@ public class UserRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Check if username exists - Username exists")
-    void existsByUsername_UsernameExists() {
+    void existsByUsernameUsernameExists() {
         boolean exists = userRepository.existsByUsername(testUser.getUsername());
 
         assertTrue(exists, "Username should exist in the database");
@@ -82,7 +82,7 @@ public class UserRepositoryIntegrationTest {
 
     @Test
     @DisplayName("Check if username exists - Username does not exist")
-    void existsByUsername_UsernameDoesNotExist() {
+    void existsByUsernameUsernameDoesNotExist() {
         boolean exists = userRepository.existsByUsername("nonexistentuser");
 
         assertFalse(exists, "Username should not exist in the database");

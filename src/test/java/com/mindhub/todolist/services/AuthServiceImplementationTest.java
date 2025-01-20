@@ -45,7 +45,7 @@ class AuthServiceImplementationTest {
     }
 
     @Test
-    void authenticateUser_Success() {
+    void authenticateUserSuccess() {
         LoginUser loginUser = new LoginUser("test@example.com", "password");
         String generatedToken = "mockToken";
 
@@ -65,7 +65,7 @@ class AuthServiceImplementationTest {
 
 
     @Test
-    void authenticateUser_BadCredentials() {
+    void authenticateUserBadCredentials() {
         LoginUser loginUser = new LoginUser("test@example.com", "wrongPassword");
 
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
@@ -80,7 +80,7 @@ class AuthServiceImplementationTest {
     }
 
     @Test
-    void authenticateUser_InternalServerError() {
+    void authenticateUserInternalServerError() {
         LoginUser loginUser = new LoginUser("test@example.com", "password");
 
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
@@ -95,7 +95,7 @@ class AuthServiceImplementationTest {
     }
 
     @Test
-    void registerUser_Success() {
+    void registerUserSuccess() {
         RegisterUserDTO registerUserDTO = new RegisterUserDTO();
         registerUserDTO.setEmail("test@example.com");
         registerUserDTO.setUsername("username");
@@ -117,7 +117,7 @@ class AuthServiceImplementationTest {
     }
 
     @Test
-    void registerUser_MissingFields() {
+    void registerUserMissingFields() {
         RegisterUserDTO registerUserDTO = new RegisterUserDTO();
 
         AuthResponseDTO response = authService.registerUser(registerUserDTO);
@@ -128,7 +128,7 @@ class AuthServiceImplementationTest {
     }
 
     @Test
-    void registerUser_EmailOrUsernameInUse() {
+    void registerUserEmailOrUsernameInUse() {
         RegisterUserDTO registerUserDTO = new RegisterUserDTO();
         registerUserDTO.setEmail("test@example.com");
         registerUserDTO.setUsername("username");
