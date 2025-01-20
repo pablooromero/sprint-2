@@ -38,10 +38,10 @@ public class TaskControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    TaskService taskService;
+    private TaskService taskService;
 
     @Mock
-    Authentication authentication;
+    private Authentication authentication;
 
     private UserEntity user;
     private Task task;

@@ -40,7 +40,10 @@ public class AuthControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    AuthService authService;
+    private UserService userService;
+
+    @MockBean
+    private AuthService authService;
 
     @Autowired
     private ObjectMapper objectMapper;

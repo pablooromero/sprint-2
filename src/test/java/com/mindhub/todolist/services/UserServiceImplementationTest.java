@@ -76,7 +76,7 @@ public class UserServiceImplementationTest {
         updatedUserDTO.setUsername("pabloupdated");
         updatedUserDTO.setEmail("pabloupdated@test.com");
 
-        UserDTO result = userService.updateUser(1L, updatedUserDTO);
+        UserDTO result = userService.updateUser(user.getId(), updatedUserDTO);
 
         assertEquals("pabloupdated", result.getUsername());
         assertEquals("pabloupdated@test.com", result.getEmail());
@@ -90,7 +90,7 @@ public class UserServiceImplementationTest {
 
         when(userRepository.findById(1L)).thenReturn(Optional.empty());
 
-        assertThrows(UserNotFoundException.class, () -> userService.updateUser(1L, updatedUserDTO));
+        assertThrows(UserNotFoundException.class, () -> userService.updateUser(user.getId(), updatedUserDTO));
     }
 
     @Test
