@@ -60,19 +60,6 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public UserDTO createUser(UserDTO userDTO) throws IllegalAttributeException {
-        validateUser(userDTO);
-
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUsername(userDTO.getUsername());
-        userEntity.setEmail(userDTO.getEmail());
-        userEntity.setRole(RoleEnum.USER);
-
-        UserEntity savedUser = saveUser(userEntity);
-        return new UserDTO(savedUser);
-    }
-
-    @Override
     public UserDTO createAdmin(UserDTO userDTO) throws IllegalAttributeException {
         validateUser(userDTO);
 
@@ -80,6 +67,7 @@ public class UserServiceImplementation implements UserService {
         userEntity.setUsername(userDTO.getUsername());
         userEntity.setEmail(userDTO.getEmail());
         userEntity.setRole(RoleEnum.ADMIN);
+        userEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
         UserEntity savedUser = saveUser(userEntity);
         return new UserDTO(savedUser);

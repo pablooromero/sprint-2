@@ -20,4 +20,8 @@ public class AuthResponseDTO {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

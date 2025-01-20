@@ -186,30 +186,6 @@ public class AdminController {
     }
 
 
-    @Operation(summary = "Create a new user", description = "Create a new user and associate the details")
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "User created successfully",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserDTO.class))
-            ),
-            @ApiResponse(responseCode = "400", description = "Validation errors",
-                    content = @Content(mediaType = "application/json",
-                            examples = @ExampleObject(value = "Email format is invalid")
-                    )
-            ),
-            @ApiResponse(responseCode = "409", description = "Email already in use",
-                    content = @Content(mediaType = "application/json",
-                            examples = @ExampleObject(value = "Email is already in use")
-                    )
-            )
-    })
-    @PostMapping("/users")
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) throws IllegalAttributeException, UserNotFoundException {
-        UserDTO newUser = userService.createUser(userDTO);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-    }
-
-
-
     @Operation(summary = "Create a new admin", description = "Create a new admin and associate the details")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "User admin created successfully",

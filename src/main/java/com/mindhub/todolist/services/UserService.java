@@ -20,8 +20,6 @@ public interface UserService {
 
     UserEntity saveUser(UserEntity userEntity);
 
-    UserDTO createUser(UserDTO userDTO) throws UserNotFoundException, IllegalAttributeException;
-
     UserDTO createAdmin(UserDTO userDTO) throws IllegalAttributeException;
 
     UserDTO updateUser(Long id, UserDTO userDTO) throws UserNotFoundException, IllegalAttributeException;

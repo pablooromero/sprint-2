@@ -79,4 +79,8 @@ public class UserEntity {
     public void setRole(RoleEnum role) {
         this.role = role;
     }
+
+    public void setId(Long userId) {
+        this.id = userId;
+    }
 }

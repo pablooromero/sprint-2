@@ -9,6 +9,7 @@ public class UserDTO {
 
     private String username;
     private String email;
+    private String password;
 
     private List<TaskDTO> tasks;
 
@@ -16,6 +17,7 @@ public class UserDTO {
         id = userEntity.getId();
         username = userEntity.getUsername();
         email = userEntity.getEmail();
+        password = userEntity.getPassword();
         tasks = userEntity.getTasks()
                 .stream()
                 .map(TaskDTO::new)
@@ -38,5 +40,25 @@ public class UserDTO {
 
     public List<TaskDTO> getTasks() {
         return tasks;
+    }
+
+    public void setUsername(String newUser) {
+        username = newUser;
+    }
+
+    public void setEmail(String mail) {
+        email = mail;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
