@@ -1,5 +1,6 @@
 package com.mindhub.todolist.services;
 
+import com.mindhub.todolist.ErrorMessages;
 import com.mindhub.todolist.config.JwtUtils;
 import com.mindhub.todolist.dtos.AuthResponseDTO;
 import com.mindhub.todolist.dtos.LoginUser;
@@ -19,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static com.mindhub.todolist.ErrorMessages.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -60,7 +62,7 @@ class AuthServiceImplementationTest {
         assertEquals(200, response.getStatusCode().value());
         assertNotNull(response.getBody());
         assertEquals(generatedToken, response.getBody().getToken());
-        assertEquals("Logged in successfully", response.getBody().getMessage());
+        assertEquals(LOGIN_SUCCESSFUL, response.getBody().getMessage());
     }
 
 
@@ -76,7 +78,7 @@ class AuthServiceImplementationTest {
         assertEquals(401, response.getStatusCode().value());
         assertNotNull(response.getBody());
         assertEquals("-", response.getBody().getToken());
-        assertEquals("Invalid email or password", response.getBody().getMessage());
+        assertEquals(INVALID_MAIL_PASSWORD, response.getBody().getMessage());
     }
 
     @Test
@@ -91,7 +93,7 @@ class AuthServiceImplementationTest {
         assertEquals(500, response.getStatusCode().value());
         assertNotNull(response.getBody());
         assertEquals("-", response.getBody().getToken());
-        assertEquals("An error occurred during login", response.getBody().getMessage());
+        assertEquals(ERROR_DURING_LOGIN, response.getBody().getMessage());
     }
 
     @Test
@@ -112,7 +114,7 @@ class AuthServiceImplementationTest {
         AuthResponseDTO response = authService.registerUser(registerUserDTO);
 
         assertEquals(generatedToken, response.getToken());
-        assertEquals("User registered successfully", response.getMessage());
+        assertEquals(REGISTER_SUCCESSFUL, response.getMessage());
         verify(userRepository, times(1)).save(any(UserEntity.class));
     }
 
@@ -123,7 +125,7 @@ class AuthServiceImplementationTest {
         AuthResponseDTO response = authService.registerUser(registerUserDTO);
 
         assertEquals("-", response.getToken());
-        assertEquals("Every field is required.", response.getMessage());
+        assertEquals(EVERY_FIELD_REQUIRED, response.getMessage());
         verify(userRepository, never()).save(any(UserEntity.class));
     }
 
@@ -139,7 +141,7 @@ class AuthServiceImplementationTest {
         AuthResponseDTO response = authService.registerUser(registerUserDTO);
 
         assertEquals("-", response.getToken());
-        assertEquals("The email or username is already in use.", response.getMessage());
+        assertEquals(EMAIL_USERNAME_ALREADY_USED, response.getMessage());
         verify(userRepository, never()).save(any(UserEntity.class));
     }
 }

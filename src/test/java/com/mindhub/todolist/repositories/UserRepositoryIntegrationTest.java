@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+import static com.mindhub.todolist.ErrorMessages.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
@@ -45,7 +46,7 @@ public class UserRepositoryIntegrationTest {
         Optional<UserEntity> result = userRepository.findByEmail(testUser.getEmail());
 
         assertTrue(result.isPresent(), "User should be found by email");
-        assertEquals(testUser.getEmail(), result.get().getEmail(), "The email should match");
+        assertEquals(testUser.getEmail(), result.get().getEmail(), EMAIL_SHOULD_MATCH);
     }
 
     @Test
@@ -53,7 +54,7 @@ public class UserRepositoryIntegrationTest {
     void findByEmailUserDoesNotExist() {
         Optional<UserEntity> result = userRepository.findByEmail("nonexistent@example.com");
 
-        assertFalse(result.isPresent(), "User should not be found by non-existent email");
+        assertFalse(result.isPresent(), NOT_EXISTENT_EMAIL);
     }
 
     @Test
@@ -61,7 +62,7 @@ public class UserRepositoryIntegrationTest {
     void existsByEmailEmailExists() {
         boolean exists = userRepository.existsByEmail(testUser.getEmail());
 
-        assertTrue(exists, "Email should exist in the database");
+        assertTrue(exists, EMAIL_SHOULD_EXIST);
     }
 
     @Test
@@ -69,7 +70,7 @@ public class UserRepositoryIntegrationTest {
     void existsByEmailEmailDoesNotExist() {
         boolean exists = userRepository.existsByEmail("nonexistent@example.com");
 
-        assertFalse(exists, "Email should not exist in the database");
+        assertFalse(exists, EMAIL_SHOULD_NOT_EXIST);
     }
 
     @Test
@@ -77,7 +78,7 @@ public class UserRepositoryIntegrationTest {
     void existsByUsernameUsernameExists() {
         boolean exists = userRepository.existsByUsername(testUser.getUsername());
 
-        assertTrue(exists, "Username should exist in the database");
+        assertTrue(exists, USERNAME_SHOULD_EXIST);
     }
 
     @Test
@@ -85,6 +86,6 @@ public class UserRepositoryIntegrationTest {
     void existsByUsernameUsernameDoesNotExist() {
         boolean exists = userRepository.existsByUsername("nonexistentuser");
 
-        assertFalse(exists, "Username should not exist in the database");
+        assertFalse(exists, USERNAME_SHOULD_NOT_EXIST);
     }
 }
